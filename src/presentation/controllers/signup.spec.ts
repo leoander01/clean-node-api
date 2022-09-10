@@ -7,8 +7,8 @@ describe('SignUp Controller', () => {
       body: {
         email: 'any_email@email.com',
         password: 'any_password',
-        passwordConfirmation: 'any_password'
-      }
+        passwordConfirmation: 'any_password',
+      },
     }
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
@@ -21,8 +21,8 @@ describe('SignUp Controller', () => {
       body: {
         name: 'any_name',
         password: 'any_password',
-        passwordConfirmation: 'any_password'
-      }
+        passwordConfirmation: 'any_password',
+      },
     }
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
