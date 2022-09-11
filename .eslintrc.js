@@ -12,6 +12,7 @@ module.exports = {
       exports: 'always-multiline',
       functions: 'always-multiline',
     }],
+    // '@typescript-eslint/space-before-function-paren': 'warn',
     '@typescript-eslint/strict-boolean-expressions': 'off',
   },
 }
