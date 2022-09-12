@@ -5,7 +5,7 @@
   "author": "leoander01 <leoanderneves8@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest --passWithNoTests --watch",
+    "test": "jest --passWithNoTests",
     "test:staged": "jest --passWithNoTests"
   },
   "devDependencies": {
