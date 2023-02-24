@@ -5,7 +5,8 @@ module.exports = {
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
-  preset: '@shelf/mongodb',
+  // A preset that is used as a base for Jest's configuration.
+  preset: '@shelf/jest-mongodb',
   // The test environment that will be used for testing
   testEnvironment: 'node',
   // A map from regular expressions to paths to transformers
