@@ -1,16 +1,16 @@
-import { Encrypter, AddAccountModel, AccountModel, AddAccountRepository } from './db-add-account-protocols'
+import { type Encrypter, type AddAccountModel, type AccountModel, type AddAccountRepository } from './db-add-account-protocols'
 import { DbAddAccount } from './db-add-account'
 
 interface SutTypes {
-  sut: DbAddAccount,
-  encrypterStub: Encrypter,
-  addAccountRepositoryStub: AddAccountRepository,
+  sut: DbAddAccount
+  encrypterStub: Encrypter
+  addAccountRepositoryStub: AddAccountRepository
 }
 
 const makeEncrypter = (): Encrypter => {
   class EncrypterStub implements Encrypter {
     async encrypt (value: string): Promise<string> {
-      return new Promise(resolve => resolve('hashed_password'))
+      return await new Promise(resolve => resolve('hashed_password'))
     }
   }
   return new EncrypterStub()
@@ -23,9 +23,9 @@ const makeAddAccountRepository = (): AddAccountRepository => {
         id: 'valid_id',
         name: 'valid_name',
         email: 'valid_email',
-        password: 'hashed_password',
+        password: 'hashed_password'
       }
-      return new Promise(resolve => resolve(fakeAccount))
+      return await new Promise(resolve => resolve(fakeAccount))
     }
   }
   return new AddAccountRepositoryStub()
@@ -38,7 +38,7 @@ const makeSut = (): SutTypes => {
   return {
     sut,
     encrypterStub,
-    addAccountRepositoryStub,
+    addAccountRepositoryStub
   }
 }
 
@@ -49,7 +49,7 @@ describe('DbAddAccount UseCase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password',
+      password: 'valid_password'
     }
     await sut.add(accountData)
     expect(encryptSpy).toHaveBeenCalledWith('valid_password')
@@ -61,7 +61,7 @@ describe('DbAddAccount UseCase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password',
+      password: 'valid_password'
     }
     const promise = sut.add(accountData)
     await expect(promise).rejects.toThrow()
@@ -73,13 +73,13 @@ describe('DbAddAccount UseCase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password',
+      password: 'valid_password'
     }
     await sut.add(accountData)
     expect(addSpy).toHaveBeenCalledWith({
       name: 'valid_name',
       email: 'valid_email',
-      password: 'hashed_password',
+      password: 'hashed_password'
     })
   })
 
@@ -89,7 +89,7 @@ describe('DbAddAccount UseCase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password',
+      password: 'valid_password'
     }
     const promise = sut.add(accountData)
     await expect(promise).rejects.toThrow()
@@ -100,14 +100,14 @@ describe('DbAddAccount UseCase', () => {
     const accountData = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password',
+      password: 'valid_password'
     }
     const account = await sut.add(accountData)
     expect(account).toEqual({
-      id: 'valid_id', 
+      id: 'valid_id',
       name: 'valid_name',
       email: 'valid_email',
-      password: 'hashed_password',
+      password: 'hashed_password'
     })
   })
 })
